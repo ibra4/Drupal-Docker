@@ -36,19 +36,8 @@ services:
     volumes:
       - drupal-data:/var/www/html
       - ./nginx-conf:/etc/nginx/conf.d
-      - certbot-etc:/etc/letsencrypt
     networks:
       - external
-
-  certbot:
-    depends_on:
-      - webserver
-    image: certbot/certbot
-    container_name: certbot
-    volumes:
-      - certbot-etc:/etc/letsencrypt
-      - drupal-data:/var/www/html
-    command: certonly --webroot --webroot-path=/var/www/html --email sammy@habed.org --agree-tos --no-eff-email --force-renewal -d habed.org -d www.habed.org
 
 networks:
   external:
@@ -59,4 +48,3 @@ networks:
 volumes:
   drupal-data:
   db-data:
-  certbot-etc:
